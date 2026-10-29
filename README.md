@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=300&size=14&duration=3600&pause=1800&color=9FB3C8&center=true&vCenter=true&width=480&height=28&lines=building+things+for+small+screens;currently%3A+3ds+homebrew+%26+tauri+apps;slow+software%2C+made+with+care" alt="">
+  <img src="assets/tagline.svg" width="100%" alt="building things for small screens">
 </p>
 
 <p align="center">
@@ -11,9 +11,9 @@
 </p>
 
 <p align="center">
-  <a href="https://purinpage.vercel.app"><img src="assets/link-site.svg" height="36" alt="purinpage"></a>&nbsp;
-  <a href="https://ko-fi.com/p0mpurin"><img src="assets/link-kofi.svg" height="36" alt="ko-fi"></a>&nbsp;
-  <a href="https://github.com/p0mpurin?tab=repositories"><img src="assets/link-repos.svg" height="36" alt="all repos"></a>
+  <a href="https://purinpage.vercel.app"><img src="assets/link-site.svg" height="38" alt="purinpage"></a>&nbsp;
+  <a href="https://ko-fi.com/p0mpurin"><img src="assets/link-kofi.svg" height="38" alt="ko-fi"></a>&nbsp;
+  <a href="https://github.com/p0mpurin?tab=repositories"><img src="assets/link-repos.svg" height="38" alt="all repos"></a>
 </p>
 
 <br>

@@ -13,14 +13,14 @@
       <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.10"/>
       <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
     </radialGradient>
-    
   </defs>
+  
   <rect x="0.5" y="0.5" width="599" height="199" rx="14" fill="#0b0d11" stroke="#1f242c"/><rect x="1" y="1" width="598" height="198" rx="14" fill="url(#glow)"/><rect x="28" y="0.5" width="140" height="1.5" fill="url(#hair)"/>
-  <text x="28" y="40" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#d9c9b0">06</text>
-  <text x="572" y="41" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#8e98a6" text-anchor="end">↗</text>
-  <text x="28" y="74" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="21" font-weight="600" fill="#e9edf2" letter-spacing="0.4">jumptosb</text>
-  <text x="28" y="104" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#8e98a6">Browser extension: jump to the search bar</text><text x="28" y="125" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#8e98a6">on any site with a single key.</text>
-  <rect x="28" y="152" width="78" height="22" rx="11" fill="#9fb3c8" fill-opacity="0.06" stroke="#9fb3c8" stroke-opacity="0.28"/><text x="67" y="167" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#9fb3c8" text-anchor="middle">extension</text><rect x="114" y="152" width="37" height="22" rx="11" fill="#9fb3c8" fill-opacity="0.06" stroke="#9fb3c8" stroke-opacity="0.28"/><text x="132" y="167" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#9fb3c8" text-anchor="middle">web</text>
-  <circle cx="491" cy="163" r="4" fill="#f1e05a"/>
-  <text x="572" y="167.5" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12.5" fill="#8e98a6" text-anchor="end">JavaScript</text>
+  <text x="28.0" y="38.0" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#d9c9b0" dominant-baseline="central">06</text>
+  <text x="572.0" y="38.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" text-anchor="end" fill="#8e98a6" dominant-baseline="central">↗</text>
+  <text x="28.0" y="70.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="21" font-weight="600" letter-spacing="0.4" fill="#e9edf2" dominant-baseline="central">jumptosb</text>
+  <text x="28.0" y="100.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#8e98a6" dominant-baseline="central">Browser extension: jump to the search bar</text><text x="28.0" y="121.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#8e98a6" dominant-baseline="central">on any site with a single key.</text>
+  <rect x="28.0" y="152" width="86.2" height="22" rx="11.0" fill="#9fb3c8" fill-opacity="0.06" stroke="#9fb3c8" stroke-opacity="0.28"/><text x="71.1" y="163.0" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" text-anchor="middle" fill="#9fb3c8" dominant-baseline="central">extension</text><rect x="122.2" y="152" width="42.0" height="22" rx="11.0" fill="#9fb3c8" fill-opacity="0.06" stroke="#9fb3c8" stroke-opacity="0.28"/><text x="143.2" y="163.0" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="11.5" text-anchor="middle" fill="#9fb3c8" dominant-baseline="central">web</text>
+  <circle cx="501.1" cy="163" r="4" fill="#f1e05a"/>
+  <text x="572.0" y="163.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12.5" text-anchor="end" fill="#8e98a6" dominant-baseline="central">JavaScript</text>
 </svg>

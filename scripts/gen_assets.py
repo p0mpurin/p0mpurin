@@ -10,19 +10,50 @@ BORDER = "#1f242c"
 TEXT = "#e9edf2"
 SOFT = "#c3ccd6"
 MUTED = "#8e98a6"
+DIM = "#4a525e"
 ACCENT = "#9fb3c8"
 WARM = "#d9c9b0"
 SANS = "'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif"
 MONO = "'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace"
 
+# text measurement: real fonts when available, so pills and chips fit snugly
+FONT_DIR = os.path.join(os.environ.get("WINDIR", r"C:\Windows"), "Fonts")
+FONT_FILES = {("sans", 300): "segoeuil.ttf", ("sans", 400): "segoeui.ttf",
+              ("sans", 600): "seguisb.ttf", ("mono", 400): "CascadiaCode.ttf"}
+_cache = {}
+try:
+    from PIL import ImageFont
+except ImportError:
+    ImageFont = None
 
-def tw(s, size, k=0.56):
-    """Rough text width for layout."""
-    return len(s) * size * k
+
+def tw(s, size, family="sans", weight=400, spacing=0.0):
+    """Text width in px, with a small margin for non-Windows fallback fonts."""
+    key = (family, weight, size)
+    font = _cache.get(key)
+    if font is None and ImageFont:
+        try:
+            font = ImageFont.truetype(os.path.join(FONT_DIR, FONT_FILES[(family, weight)]), size)
+        except (OSError, KeyError):
+            font = False
+        _cache[key] = font
+    if font:
+        base = font.getlength(s)
+    else:
+        base = len(s) * size * (0.6 if family == "mono" else 0.55)
+    return base * 1.05 + spacing * max(len(s) - 1, 0)
 
 
-def defs(extra=""):
-    return f'''<defs>
+def t(x, y, s, size, fill, family="sans", weight=400, spacing=0, anchor="start", extra=""):
+    fam = MONO if family == "mono" else SANS
+    ls = f' letter-spacing="{spacing}"' if spacing else ""
+    fw = f' font-weight="{weight}"' if weight != 400 else ""
+    an = f' text-anchor="{anchor}"' if anchor != "start" else ""
+    return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{fam}" font-size="{size}"{fw}{ls}{an} '
+            f'fill="{fill}" dominant-baseline="central"{extra}>{escape(s)}</text>')
+
+
+DEFS = f'''<defs>
     <linearGradient id="hair" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="{ACCENT}" stop-opacity="0.9"/>
       <stop offset="60%" stop-color="{WARM}" stop-opacity="0.5"/>
@@ -36,7 +67,6 @@ def defs(extra=""):
       <stop offset="0%" stop-color="{ACCENT}" stop-opacity="0.10"/>
       <stop offset="100%" stop-color="{ACCENT}" stop-opacity="0"/>
     </radialGradient>
-    {extra}
   </defs>'''
 
 
@@ -47,51 +77,84 @@ def panel(w, h):
 
 
 def chip(x, y, label, h=22):
-    w = 16 + tw(label, 11.5, 0.6)
-    return w, (f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="{h}" rx="{h // 2}" fill="{ACCENT}" fill-opacity="0.06" stroke="{ACCENT}" stroke-opacity="0.28"/>'
-               f'<text x="{x + w / 2:.0f}" y="{y + 15}" font-family="{MONO}" font-size="11.5" fill="{ACCENT}" text-anchor="middle">{escape(label)}</text>')
+    w = 20 + tw(label, 11.5, "mono")
+    return w, (f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="{h / 2}" fill="{ACCENT}" '
+               f'fill-opacity="0.06" stroke="{ACCENT}" stroke-opacity="0.28"/>'
+               + t(x + w / 2, y + h / 2, label, 11.5, ACCENT, "mono", anchor="middle"))
 
 
-def save(name, w, h, body, label):
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-           f'role="img" aria-label="{escape(label)}">\n  {defs()}\n  {body}\n</svg>\n')
+def save(name, w, h, body, label, style=""):
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w:.0f}" height="{h:.0f}" viewBox="0 0 {w:.0f} {h:.0f}" '
+           f'role="img" aria-label="{escape(label)}">\n  {DEFS}\n  {style}\n  {body}\n</svg>\n')
     with open(os.path.join(ROOT, name), "w", encoding="utf-8", newline="\n") as f:
         f.write(svg)
 
 
+def clear(prefix):
+    for f in os.listdir(ROOT):
+        if f.startswith(prefix) and f.endswith(".svg"):
+            os.remove(os.path.join(ROOT, f))
+
+
+# ---------- tagline: three phrases that fade in turn ----------
+def tagline():
+    w, h = 1200, 44
+    phrases = ["building things for small screens",
+               "currently: 3ds homebrew & tauri apps",
+               "slow software, made with care"]
+    n, step = len(phrases), 4
+    total = n * step
+    style = f'''<style>
+    .p {{ opacity: 0; animation: cycle {total}s ease-in-out infinite; }}
+    {"".join(f".p{i} {{ animation-delay: {i * step}s; }} " for i in range(n))}
+    @keyframes cycle {{ 0% {{ opacity: 0; }} 4% {{ opacity: 1; }} {100 / n - 4:.1f}% {{ opacity: 1; }} {100 / n:.1f}% {{ opacity: 0; }} 100% {{ opacity: 0; }} }}
+    @media (prefers-reduced-motion: reduce) {{ .p {{ animation: none; }} .p0 {{ opacity: 1; }} }}
+  </style>'''
+    body = "".join(t(600, h / 2, p, 15, ACCENT, weight=300, spacing=1.2, anchor="middle",
+                     extra=f' class="p p{i}"') for i, p in enumerate(phrases))
+    half = max(tw(p, 15, weight=300, spacing=1.2) for p in phrases) / 2
+    for side in (-1, 1):
+        x = 600 + side * (half + 28)
+        body += f'<rect x="{x - 14 if side > 0 else x - 14:.0f}" y="{h / 2}" width="28" height="1" fill="{DIM}"/>'
+    save("tagline.svg", w, h, body, phrases[0], style)
+
+
 # ---------- intro ----------
 def intro():
-    w, h = 1200, 260
+    w, h = 1200, 268
     rows = [("focus", "3ds homebrew"),
             ("also", "desktop apps · extensions · web"),
             ("stack", "c · c++ · rust · python · ts"),
             ("since", "2024 · 50+ repositories")]
-    facts = "".join(
-        f'<text x="804" y="{82 + i * 38}" font-family="{SANS}" font-size="11" letter-spacing="3" fill="{MUTED}">{k.upper()}</text>'
-        f'<text x="896" y="{82 + i * 38}" font-family="{SANS}" font-size="14.5" fill="{SOFT}">{escape(v)}</text>'
-        for i, (k, v) in enumerate(rows))
+    facts = "".join(t(808, 78 + i * 38, k.upper(), 11, MUTED, spacing=3) + t(900, 78 + i * 38, v, 14.5, SOFT)
+                    for i, (k, v) in enumerate(rows))
+    style = f'''<style>
+    .pulse {{ animation: pulse 3.2s ease-in-out infinite; transform-origin: 54px 64px; }}
+    @keyframes pulse {{ 0%,100% {{ opacity: 0.25; transform: scale(1); }} 50% {{ opacity: 0; transform: scale(2.6); }} }}
+    @media (prefers-reduced-motion: reduce) {{ .pulse {{ animation: none; opacity: 0; }} }}
+  </style>'''
     body = f'''{panel(w, h)}
-  <circle cx="52" cy="62" r="3.5" fill="{WARM}"/>
-  <text x="66" y="66" font-family="{SANS}" font-size="12" letter-spacing="4" fill="{ACCENT}">HELLO, I'M P0MPURIN</text>
-  <text x="48" y="118" font-family="{SANS}" font-size="31" font-weight="300" fill="{TEXT}">I make homebrew, desktop apps</text>
-  <text x="48" y="158" font-family="{SANS}" font-size="31" font-weight="300" fill="{TEXT}">and <tspan fill="{WARM}">small things</tspan> for the web.</text>
-  <text x="48" y="206" font-family="{SANS}" font-size="15" fill="{MUTED}">old hardware, simple interfaces, software that stays out of the way.</text>
-  <rect x="760" y="48" width="1" height="164" fill="{BORDER}"/>
-  {facts}'''
-    save("intro.svg", w, h, body, "hello, i'm p0mpurin")
+  <circle class="pulse" cx="54" cy="64" r="4" fill="{WARM}"/>
+  <circle cx="54" cy="64" r="3.5" fill="{WARM}"/>
+  {t(68, 64, "HELLO, I'M P0MPURIN", 12, ACCENT, spacing=4)}
+  {t(48, 112, "I make homebrew, desktop apps", 31, TEXT, weight=300)}
+  <text x="48" y="152" font-family="{SANS}" font-size="31" font-weight="300" fill="{TEXT}" dominant-baseline="central">and <tspan fill="{WARM}">small things</tspan> for the web.</text>
+  {t(48, 204, "old hardware, simple interfaces, software that stays out of the way.", 15, MUTED)}
+  <rect x="764" y="52" width="1" height="164" fill="{BORDER}"/>
+  {facts}
+  {t(808, 230, "~/p0mpurin $ ls ./projects", 11.5, DIM, "mono")}'''
+    save("intro.svg", w, h, body, "hello, i'm p0mpurin", style)
 
 
 # ---------- section headers ----------
 def section(slug, idx, label, note):
     w, h = 1200, 48
-    lw = tw(label, 13, 0.75)
-    x2 = 44 + lw + 22
-    nw = tw(note, 12, 0.55)
-    body = f'''<text x="2" y="30" font-family="{MONO}" font-size="12" fill="{WARM}">{idx}</text>
-  <text x="44" y="30" font-family="{SANS}" font-size="13" letter-spacing="4" fill="{SOFT}">{label.upper()}</text>
-  <rect x="{x2:.0f}" y="25" width="{1200 - x2 - nw - 24:.0f}" height="1" fill="url(#fadeline)"/>
-  <text x="1198" y="30" font-family="{SANS}" font-size="12" fill="{MUTED}" text-anchor="end">{escape(note)}</text>'''
-    save(f"section-{slug}.svg", w, h, body, label)
+    x2 = 44 + tw(label.upper(), 13, spacing=4) + 20
+    x3 = 1198 - tw(note, 12) - 20
+    body = (t(2, 24, idx, 12, WARM, "mono") + t(44, 24, label.upper(), 13, SOFT, spacing=4)
+            + f'<rect x="{x2:.0f}" y="24" width="{x3 - x2:.0f}" height="1" fill="url(#fadeline)"/>'
+            + t(1198, 24, note, 12, MUTED, anchor="end"))
+    save(f"section-{slug}.svg", w, h, body, f"{idx} {label}")
 
 
 # ---------- project cards ----------
@@ -118,90 +181,91 @@ CARDS = [
 
 
 def cards():
-    for f in os.listdir(ROOT):
-        if f.startswith("card-"):
-            os.remove(os.path.join(ROOT, f))
+    clear("card-")
     w, h = 600, 200
     for i, (slug, title, color, lang, lines, tags) in enumerate(CARDS, 1):
-        desc = "".join(f'<text x="28" y="{104 + j * 21}" font-family="{SANS}" font-size="14" fill="{MUTED}">{escape(l)}</text>'
-                       for j, l in enumerate(lines))
+        desc = "".join(t(28, 100 + j * 21, l, 14, MUTED) for j, l in enumerate(lines))
         x, chips = 28, ""
-        for t in tags:
-            cw, c = chip(x, 152, t)
+        for tag in tags:
+            cw, c = chip(x, 152, tag)
             chips += c
             x += cw + 8
+        lang_w = tw(lang, 12.5)
         body = f'''{panel(w, h)}
-  <text x="28" y="40" font-family="{MONO}" font-size="11.5" fill="{WARM}">{i:02d}</text>
-  <text x="572" y="41" font-family="{SANS}" font-size="15" fill="{MUTED}" text-anchor="end">↗</text>
-  <text x="28" y="74" font-family="{SANS}" font-size="21" font-weight="600" fill="{TEXT}" letter-spacing="0.4">{escape(title)}</text>
+  {t(28, 38, f"{i:02d}", 11.5, WARM, "mono")}
+  {t(572, 38, "↗", 15, MUTED, anchor="end")}
+  {t(28, 70, title, 21, TEXT, weight=600, spacing=0.4)}
   {desc}
   {chips}
-  <circle cx="{572 - tw(lang, 12.5, 0.56) - 11:.0f}" cy="163" r="4" fill="{color}"/>
-  <text x="572" y="167.5" font-family="{SANS}" font-size="12.5" fill="{MUTED}" text-anchor="end">{escape(lang)}</text>'''
+  <circle cx="{572 - lang_w - 10:.1f}" cy="163" r="4" fill="{color}"/>
+  {t(572, 163, lang, 12.5, MUTED, anchor="end")}'''
         save(f"card-{slug}.svg", w, h, body, title)
 
 
 # ---------- toolkit ----------
 def toolkit():
-    w, h = 1200, 156
     cols = [("languages", ["c", "c++", "rust", "python", "typescript", "javascript", "gdscript"]),
             ("frameworks", ["react", "tauri", "flask", "node", "tailwind", "pywebview"]),
             ("platforms", ["3ds / luma3ds", "windows", "browser extensions", "vercel", "github actions"])]
-    body = panel(w, h)
+    parts, rows = [], 1
     for ci, (label, items) in enumerate(cols):
         x0 = 48 + ci * 384
-        body += f'<text x="{x0}" y="56" font-family="{SANS}" font-size="11" letter-spacing="3" fill="{MUTED}">{label.upper()}</text>'
-        x, y = x0, 76
+        parts.append(t(x0, 52, label.upper(), 11, MUTED, spacing=3))
+        x, y, r = x0, 74, 1
         for it in items:
-            cw = 16 + tw(it, 11.5, 0.6)
-            if x + cw > x0 + 340:
-                x, y = x0, y + 32
-            _, c = chip(x, y, it)
-            body += c
+            cw = 20 + tw(it, 11.5, "mono")
+            if x + cw > x0 + 336:
+                x, y, r = x0, y + 32, r + 1
+            parts.append(chip(x, y, it)[1])
             x += cw + 8
-        if ci:
-            body += f'<rect x="{x0 - 22}" y="44" width="1" height="{h - 88}" fill="{BORDER}"/>'
-    save("toolkit.svg", w, h, body, "toolkit")
+        rows = max(rows, r)
+    h = 74 + rows * 32 + 30
+    for ci in (1, 2):
+        parts.insert(0, f'<rect x="{48 + ci * 384 - 24}" y="40" width="1" height="{h - 80}" fill="{BORDER}"/>')
+    save("toolkit.svg", 1200, h, panel(1200, h) + "".join(parts), "toolkit")
 
 
 # ---------- link pills ----------
-def pill(name, label, h=36, fs=13, dot=WARM, color=SOFT):
+def pill(name, label, w, h, fs, dot, color):
     r = h / 2
-    w = int(r + 12 + tw(label, fs, 0.6) + 30)
-    body = (f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="{r}" fill="{BG}" stroke="{BORDER}"/>'
+    body = (f'<rect x="0.5" y="0.5" width="{w - 1:.0f}" height="{h - 1}" rx="{r - 0.5}" fill="{BG}" stroke="{BORDER}"/>'
+            f'<rect x="1" y="1" width="{w - 2:.0f}" height="{h - 2}" rx="{r - 1}" fill="url(#glow)"/>'
             f'<circle cx="{r}" cy="{r}" r="{h / 12:.1f}" fill="{dot}"/>'
-            f'<text x="{r + 12}" y="{r + fs * 0.36:.1f}" font-family="{SANS}" font-size="{fs}" fill="{color}">{escape(label)}</text>'
-            f'<text x="{w - 14}" y="{r + fs * 0.36:.1f}" font-family="{SANS}" font-size="{fs - 1}" fill="{MUTED}" text-anchor="end">↗</text>')
+            + t(r + 12, r, label, fs, color)
+            + t(w - r + 4, r, "↗", fs - 1, DIM if color == MUTED else MUTED, anchor="end"))
     save(name, w, h, body, label)
 
 
+LINKS = [("site", "purinpage"), ("kofi", "ko-fi"), ("repos", "all repos")]
 MORE = [("runefetch", "RuneFetch"), ("nightreign", "Nightreign launcher"), ("vitapapers", "vitapapers"),
         ("discord-css", "discord-css"), ("yt", "yt_downloader")]
 
 
 def pills():
-    for f in os.listdir(ROOT):
-        if f.startswith("link-") or f.startswith("more-"):
-            os.remove(os.path.join(ROOT, f))
-    for slug, label in [("site", "purinpage"), ("kofi", "ko-fi"), ("repos", "all repos")]:
-        pill(f"link-{slug}.svg", label)
+    clear("link-")
+    clear("more-")
+    h = 38
+    w = max(tw(l, 13.5) for _, l in LINKS) + h / 2 + 12 + 34   # same width for all three
+    for slug, label in LINKS:
+        pill(f"link-{slug}.svg", label, w, h, 13.5, WARM, SOFT)
     for slug, label in MORE:
-        pill(f"more-{slug}.svg", label, h=28, fs=12, dot=ACCENT, color=MUTED)
+        h2 = 28
+        pill(f"more-{slug}.svg", label, tw(label, 12) + h2 / 2 + 12 + 26, h2, 12, ACCENT, MUTED)
 
 
 # ---------- footer ----------
 def footer():
-    w, h = 1200, 90
-    body = f'''<rect x="300" y="20" width="600" height="1" fill="{BORDER}"/>
-  <rect x="300" y="20" width="300" height="1" fill="url(#fadeline)" transform="rotate(180 450 20.5)"/>
+    w, h = 1200, 96
+    body = f'''<rect x="300" y="20" width="300" height="1" fill="url(#fadeline)" transform="rotate(180 450 20.5)"/>
   <rect x="600" y="20" width="300" height="1" fill="url(#fadeline)"/>
   <circle cx="600" cy="20.5" r="3" fill="{WARM}"/>
-  <text x="600" y="56" font-family="{SANS}" font-size="13" letter-spacing="5" fill="{MUTED}" text-anchor="middle">THANKS FOR STOPPING BY</text>
-  <text x="600" y="78" font-family="{MONO}" font-size="11" fill="#4a525e" text-anchor="middle">p0mpurin · made slowly, with care</text>'''
+  {t(600, 54, "THANKS FOR STOPPING BY", 13, MUTED, spacing=5, anchor="middle")}
+  {t(600, 78, "p0mpurin · made slowly, with care", 11, DIM, "mono", anchor="middle")}'''
     save("footer.svg", w, h, body, "thanks for stopping by")
 
 
 if __name__ == "__main__":
+    tagline()
     intro()
     section("works", "01", "works", "selected projects")
     section("toolkit", "02", "toolkit", "what i build with")

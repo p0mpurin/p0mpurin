@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="44" viewBox="0 0 1200 44" role="img" aria-label="building things for small screens">
+  <defs>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#d9c9b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d9c9b0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    .p { opacity: 0; animation: cycle 12s ease-in-out infinite; }
+    .p0 { animation-delay: 0s; } .p1 { animation-delay: 4s; } .p2 { animation-delay: 8s; } 
+    @keyframes cycle { 0% { opacity: 0; } 4% { opacity: 1; } 29.3% { opacity: 1; } 33.3% { opacity: 0; } 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .p { animation: none; } .p0 { opacity: 1; } }
+  </style>
+  <text x="600.0" y="22.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="300" letter-spacing="1.2" text-anchor="middle" fill="#9fb3c8" dominant-baseline="central" class="p p0">building things for small screens</text><text x="600.0" y="22.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="300" letter-spacing="1.2" text-anchor="middle" fill="#9fb3c8" dominant-baseline="central" class="p p1">currently: 3ds homebrew &amp; tauri apps</text><text x="600.0" y="22.0" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="300" letter-spacing="1.2" text-anchor="middle" fill="#9fb3c8" dominant-baseline="central" class="p p2">slow software, made with care</text><rect x="415" y="22.0" width="28" height="1" fill="#4a525e"/><rect x="757" y="22.0" width="28" height="1" fill="#4a525e"/>
+</svg>
