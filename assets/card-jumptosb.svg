@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="176" viewBox="0 0 600 176" role="img" aria-label="jumptosb">
+  <style>
+    .t { font: 600 21px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #e9edf2; letter-spacing: 0.5px; }
+    .d { font: 400 14px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #8e98a6; }
+    .c { font: 500 11px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9fb3c8; letter-spacing: 0.5px; }
+    .l { font: 400 12.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #8e98a6; }
+  </style>
+  <rect x="0.5" y="0.5" width="599" height="175" rx="14" fill="#0b0d11" stroke="#1f242c"/>
+  <text x="28" y="44" class="t">jumptosb</text>
+  <rect x="28" y="56" width="22" height="2" rx="1" fill="#d9c9b0" fill-opacity="0.8"/>
+  <circle cx="490" cy="39" r="4.5" fill="#f1e05a"/>
+  <text x="572" y="43" class="l" text-anchor="end">JavaScript</text>
+  <text x="28" y="84" class="d">Browser extension: jump to the search bar</text><text x="28" y="105" class="d">on any site with a single key.</text>
+  <rect x="28" y="134" width="77" height="20" rx="10" fill="none" stroke="#9fb3c8" stroke-opacity="0.35"/><text x="66" y="148" class="c" text-anchor="middle">extension</text><rect x="113" y="134" width="35" height="20" rx="10" fill="none" stroke="#9fb3c8" stroke-opacity="0.35"/><text x="130" y="148" class="c" text-anchor="middle">web</text>
+</svg>

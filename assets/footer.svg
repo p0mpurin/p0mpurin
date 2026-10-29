@@ -1,20 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="120" viewBox="0 0 1200 120" role="img" aria-label="thanks for visiting">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="60" viewBox="0 0 1200 60" role="img" aria-label="thanks for stopping by">
   <defs>
-    <filter id="blur" x="-20%" y="-100%" width="140%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
-    <clipPath id="frame"><rect width="1200" height="120" rx="18"/></clipPath>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#9fb3c8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </linearGradient>
     <style>
-      .mist { animation: drift 30s ease-in-out infinite alternate; }
-      @keyframes drift { from { transform: translateX(-50px); } to { transform: translateX(50px); } }
-      .msg { font: 400 15px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 4px; fill: #7EBEA5; }
+      .msg { font: 400 14px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 5px; fill: #8e98a6; }
     </style>
   </defs>
-  <g clip-path="url(#frame)">
-    <rect width="1200" height="120" fill="#000"/>
-    <g class="mist" filter="url(#blur)" fill="#7EBEA5" fill-opacity="0.12">
-      <ellipse cx="350" cy="90" rx="380" ry="20"/>
-      <ellipse cx="880" cy="96" rx="400" ry="18"/>
-    </g>
-    <path fill="#070b0a" d="M0 100 L150 84 L300 98 L470 80 L640 100 L800 86 L960 102 L1100 88 L1200 98 L1200 120 L0 120 Z"/>
-    <text class="msg" x="600" y="52" text-anchor="middle">またね  ·  thanks for stopping by</text>
-  </g>
+  <rect x="200" y="14" width="800" height="1" fill="url(#line)"/>
+  <text class="msg" x="600" y="46" text-anchor="middle">thanks for stopping by</text>
 </svg>

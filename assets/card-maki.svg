@@ -1,17 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200" role="img" aria-label="maki">
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="176" viewBox="0 0 600 176" role="img" aria-label="maki">
   <style>
-    .t { font: 600 24px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #eef5f1; letter-spacing: 1px; }
-    .d { font: 400 14.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9aa8a2; }
-    .c { font: 500 11.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #a9d6c4; letter-spacing: 0.5px; }
-    .l { font: 400 13px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9aa8a2; }
-    .k { font: 300 150px 'Yu Mincho', 'Hiragino Mincho ProN', 'Noto Serif JP', 'MS Mincho', serif; fill: #7EBEA5; fill-opacity: 0.07; }
+    .t { font: 600 21px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #e9edf2; letter-spacing: 0.5px; }
+    .d { font: 400 14px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #8e98a6; }
+    .c { font: 500 11px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9fb3c8; letter-spacing: 0.5px; }
+    .l { font: 400 12.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #8e98a6; }
   </style>
-  <rect x="0.5" y="0.5" width="599" height="199" rx="16" fill="#050505" stroke="#1d2421"/>
-  <text x="590" y="168" class="k" text-anchor="end">巻</text>
-  <rect x="32" y="62" width="28" height="2" fill="#7EBEA5"/>
-  <text x="32" y="48" class="t">maki</text>
-  <circle cx="550" cy="40" r="5" fill="#555555"/>
-  <text x="568" y="45" class="l" text-anchor="end">C</text>
-  <text x="32" y="96" class="d">Anime streaming client for the 3DS. A tiny Node proxy</text><text x="32" y="118" class="d">transcodes to raw H.264 + PCM for the hardware decoder.</text>
-  <rect x="32" y="160" width="36" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="50" y="175" class="c" text-anchor="middle">3DS</text><rect x="75.6" y="160" width="64" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="108" y="175" class="c" text-anchor="middle">node.js</text><rect x="148.0" y="160" width="57" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="177" y="175" class="c" text-anchor="middle">ffmpeg</text>
+  <rect x="0.5" y="0.5" width="599" height="175" rx="14" fill="#0b0d11" stroke="#1f242c"/>
+  <text x="28" y="44" class="t">maki</text>
+  <rect x="28" y="56" width="22" height="2" rx="1" fill="#d9c9b0" fill-opacity="0.8"/>
+  <circle cx="555" cy="39" r="4.5" fill="#555555"/>
+  <text x="572" y="43" class="l" text-anchor="end">C</text>
+  <text x="28" y="84" class="d">Anime streaming on the 3DS through a tiny</text><text x="28" y="105" class="d">Node proxy that transcodes for the hardware.</text>
+  <rect x="28" y="134" width="35" height="20" rx="10" fill="none" stroke="#9fb3c8" stroke-opacity="0.35"/><text x="46" y="148" class="c" text-anchor="middle">3ds</text><rect x="71" y="134" width="42" height="20" rx="10" fill="none" stroke="#9fb3c8" stroke-opacity="0.35"/><text x="92" y="148" class="c" text-anchor="middle">node</text>
 </svg>
