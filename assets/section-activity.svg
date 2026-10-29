@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="48" viewBox="0 0 1200 48" role="img" aria-label="activity">
+  <defs>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#d9c9b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d9c9b0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <text x="2" y="30" font-family="'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="12" fill="#d9c9b0">03</text>
+  <text x="44" y="30" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#c3ccd6">ACTIVITY</text>
+  <rect x="144" y="25" width="946" height="1" fill="url(#fadeline)"/>
+  <text x="1198" y="30" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#8e98a6" text-anchor="end">updated daily</text>
+</svg>

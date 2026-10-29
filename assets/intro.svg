@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="hello, i'm p0mpurin">
+  <defs>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#d9c9b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d9c9b0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect x="0.5" y="0.5" width="1199" height="259" rx="14" fill="#0b0d11" stroke="#1f242c"/><rect x="1" y="1" width="1198" height="258" rx="14" fill="url(#glow)"/><rect x="28" y="0.5" width="140" height="1.5" fill="url(#hair)"/>
+  <circle cx="52" cy="62" r="3.5" fill="#d9c9b0"/>
+  <text x="66" y="66" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4" fill="#9fb3c8">HELLO, I'M P0MPURIN</text>
+  <text x="48" y="118" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="31" font-weight="300" fill="#e9edf2">I make homebrew, desktop apps</text>
+  <text x="48" y="158" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="31" font-weight="300" fill="#e9edf2">and <tspan fill="#d9c9b0">small things</tspan> for the web.</text>
+  <text x="48" y="206" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#8e98a6">old hardware, simple interfaces, software that stays out of the way.</text>
+  <rect x="760" y="48" width="1" height="164" fill="#1f242c"/>
+  <text x="804" y="82" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#8e98a6">FOCUS</text><text x="896" y="82" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14.5" fill="#c3ccd6">3ds homebrew</text><text x="804" y="120" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#8e98a6">ALSO</text><text x="896" y="120" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14.5" fill="#c3ccd6">desktop apps · extensions · web</text><text x="804" y="158" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#8e98a6">STACK</text><text x="896" y="158" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14.5" fill="#c3ccd6">c · c++ · rust · python · ts</text><text x="804" y="196" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#8e98a6">SINCE</text><text x="896" y="196" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14.5" fill="#c3ccd6">2024 · 50+ repositories</text>
+</svg>

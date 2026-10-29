@@ -2,24 +2,23 @@
   <img src="assets/banner.gif" alt="" width="100%">
 </p>
 
-<h3 align="center">p0mpurin</h3>
-
 <p align="center">
-  <sub>homebrew &nbsp;·&nbsp; desktop apps &nbsp;·&nbsp; small web things</sub>
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=300&size=14&duration=3600&pause=1800&color=9FB3C8&center=true&vCenter=true&width=480&height=28&lines=building+things+for+small+screens;currently%3A+3ds+homebrew+%26+tauri+apps;slow+software%2C+made+with+care" alt="">
 </p>
 
 <p align="center">
-  <a href="https://purinpage.vercel.app"><img src="https://img.shields.io/badge/site-purinpage-9fb3c8?style=flat-square&labelColor=0b0d11" alt="purinpage"></a>
-  <a href="https://ko-fi.com/p0mpurin"><img src="https://img.shields.io/badge/ko--fi-support-9fb3c8?style=flat-square&logo=ko-fi&logoColor=white&labelColor=0b0d11" alt="Ko-fi"></a>
+  <img src="assets/intro.svg" width="100%" alt="hello, i'm p0mpurin. i make homebrew, desktop apps and small things for the web.">
+</p>
+
+<p align="center">
+  <a href="https://purinpage.vercel.app"><img src="assets/link-site.svg" height="36" alt="purinpage"></a>&nbsp;
+  <a href="https://ko-fi.com/p0mpurin"><img src="assets/link-kofi.svg" height="36" alt="ko-fi"></a>&nbsp;
+  <a href="https://github.com/p0mpurin?tab=repositories"><img src="assets/link-repos.svg" height="36" alt="all repos"></a>
 </p>
 
 <br>
 
-I make things I want to use myself: homebrew for the Nintendo 3DS, quiet desktop apps,
-browser extensions and the occasional website. I like old hardware, simple interfaces
-and software that stays out of the way.
-
-<br>
+<img src="assets/section-works.svg" width="100%" alt="01 works">
 
 <p align="center">
   <a href="https://github.com/p0mpurin/Rune3DS"><img src="assets/card-rune3ds.svg" width="49%" alt="Rune3DS"></a>
@@ -31,24 +30,24 @@ and software that stays out of the way.
 </p>
 
 <p align="center">
-  <sub>
-    also &nbsp;
-    <a href="https://github.com/p0mpurin/RuneFetch">RuneFetch</a> ·
-    <a href="https://github.com/p0mpurin/Nightreign-launcher">Nightreign launcher</a> ·
-    <a href="https://github.com/p0mpurin/vitapapers">vitapapers</a> ·
-    <a href="https://github.com/p0mpurin/discord-css">discord-css</a> ·
-    <a href="https://github.com/p0mpurin/yt_downloader">yt_downloader</a> ·
-    <a href="https://github.com/p0mpurin?tab=repositories">everything else</a>
-  </sub>
+  <a href="https://github.com/p0mpurin/RuneFetch"><img src="assets/more-runefetch.svg" height="28" alt="RuneFetch"></a>
+  <a href="https://github.com/p0mpurin/Nightreign-launcher"><img src="assets/more-nightreign.svg" height="28" alt="Nightreign launcher"></a>
+  <a href="https://github.com/p0mpurin/vitapapers"><img src="assets/more-vitapapers.svg" height="28" alt="vitapapers"></a>
+  <a href="https://github.com/p0mpurin/discord-css"><img src="assets/more-discord-css.svg" height="28" alt="discord-css"></a>
+  <a href="https://github.com/p0mpurin/yt_downloader"><img src="assets/more-yt.svg" height="28" alt="yt_downloader"></a>
 </p>
 
 <br>
+
+<img src="assets/section-toolkit.svg" width="100%" alt="02 toolkit">
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=c,cpp,rust,py,ts,js,react,tauri,nodejs,flask,tailwind,godot&theme=dark&perline=12" alt="tech stack">
+  <img src="assets/toolkit.svg" width="100%" alt="languages: c, c++, rust, python, typescript, javascript, gdscript. frameworks: react, tauri, flask, node, tailwind, pywebview. platforms: 3ds, windows, browser extensions, vercel, github actions.">
 </p>
 
 <br>
+
+<img src="assets/section-activity.svg" width="100%" alt="03 activity">
 
 <p align="center">
   <picture>
@@ -58,6 +57,8 @@ and software that stays out of the way.
   </picture>
 </p>
 
+<br>
+
 <p align="center">
-  <img src="assets/footer.svg" alt="thanks for stopping by" width="100%">
+  <img src="assets/footer.svg" width="100%" alt="thanks for stopping by">
 </p>

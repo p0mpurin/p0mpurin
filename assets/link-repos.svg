@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="36" viewBox="0 0 130 36" role="img" aria-label="all repos">
+  <defs>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#d9c9b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d9c9b0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#9fb3c8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#9fb3c8" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect x="0.5" y="0.5" width="129" height="35" rx="18.0" fill="#0b0d11" stroke="#1f242c"/><circle cx="18.0" cy="18.0" r="3.0" fill="#d9c9b0"/><text x="30.0" y="22.7" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#c3ccd6">all repos</text><text x="116" y="22.7" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#8e98a6" text-anchor="end">↗</text>
+</svg>
