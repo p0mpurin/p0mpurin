@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200" role="img" aria-label="Kasumi">
+  <style>
+    .t { font: 600 24px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #eef5f1; letter-spacing: 1px; }
+    .d { font: 400 14.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9aa8a2; }
+    .c { font: 500 11.5px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #a9d6c4; letter-spacing: 0.5px; }
+    .l { font: 400 13px 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #9aa8a2; }
+    .k { font: 300 150px 'Yu Mincho', 'Hiragino Mincho ProN', 'Noto Serif JP', 'MS Mincho', serif; fill: #7EBEA5; fill-opacity: 0.07; }
+  </style>
+  <rect x="0.5" y="0.5" width="599" height="199" rx="16" fill="#050505" stroke="#1d2421"/>
+  <text x="590" y="168" class="k" text-anchor="end">霞</text>
+  <rect x="32" y="62" width="28" height="2" fill="#7EBEA5"/>
+  <text x="32" y="48" class="t">Kasumi</text>
+  <circle cx="550" cy="40" r="5" fill="#555555"/>
+  <text x="568" y="45" class="l" text-anchor="end">C</text>
+  <text x="32" y="96" class="d">GeForce NOW, Xbox Cloud Gaming and Steam Link on the</text><text x="32" y="118" class="d">New 3DS. Hardware video decode, gyro aim, and a calm</text><text x="32" y="140" class="d">hand-painted game hub.</text>
+  <rect x="32" y="160" width="36" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="50" y="175" class="c" text-anchor="middle">3DS</text><rect x="75.6" y="160" width="100" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="126" y="175" class="c" text-anchor="middle">cloud gaming</text><rect x="184.0" y="160" width="50" height="22" rx="11" fill="#7EBEA5" fill-opacity="0.10" stroke="#7EBEA5" stroke-opacity="0.35"/><text x="209" y="175" class="c" text-anchor="middle">h.264</text>
+</svg>
