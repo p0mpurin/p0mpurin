@@ -126,23 +126,59 @@ def intro():
             ("also", "desktop apps · extensions · web"),
             ("stack", "c · c++ · rust · python · ts"),
             ("since", "2024 · 50+ repositories")]
-    facts = "".join(t(808, 78 + i * 38, k.upper(), 11, MUTED, spacing=3) + t(900, 78 + i * 38, v, 14.5, SOFT)
-                    for i, (k, v) in enumerate(rows))
+    # real HTML + CSS inside the SVG (foreignObject): grid layout, blurred glows,
+    # an animated border sheen and gradient text, none of which plain SVG text can do
+    facts = "".join(f"<dt>{k}</dt><dd>{escape(v)}</dd>" for k, v in rows)
     style = f'''<style>
-    .pulse {{ animation: pulse 3.2s ease-in-out infinite; transform-origin: 54px 64px; }}
-    @keyframes pulse {{ 0%,100% {{ opacity: 0.25; transform: scale(1); }} 50% {{ opacity: 0; transform: scale(2.6); }} }}
-    @media (prefers-reduced-motion: reduce) {{ .pulse {{ animation: none; opacity: 0; }} }}
+    .wrap {{ width: {w}px; height: {h}px; box-sizing: border-box; padding: 1px; border-radius: 15px;
+      background: linear-gradient(110deg, {BORDER} 0%, {BORDER} 38%, rgba(159,179,200,.55) 48%,
+                  rgba(217,201,176,.45) 53%, {BORDER} 63%, {BORDER} 100%);
+      background-size: 300% 100%; animation: sheen 10s linear infinite; }}
+    .card {{ position: relative; height: 100%; box-sizing: border-box; border-radius: 14px; overflow: hidden;
+      background: {BG}; padding: 46px 48px; display: grid; grid-template-columns: 1fr 1px 360px;
+      column-gap: 44px; align-items: center; font-family: {SANS}; }}
+    .blob {{ position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; }}
+    .b1 {{ width: 460px; height: 300px; left: -120px; top: -160px; background: {ACCENT}; opacity: .16;
+      animation: drift 16s ease-in-out infinite alternate; }}
+    .b2 {{ width: 380px; height: 220px; right: -60px; bottom: -170px; background: {WARM}; opacity: .10;
+      animation: drift 20s ease-in-out infinite alternate-reverse; }}
+    .left, .right, .rule {{ position: relative; }}
+    .hello {{ display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 4px;
+      color: {ACCENT}; text-transform: uppercase; }}
+    .dot {{ width: 7px; height: 7px; border-radius: 50%; background: {WARM};
+      animation: pulse 3.2s ease-out infinite; }}
+    h1 {{ margin: 20px 0 0; font-size: 31px; line-height: 41px; font-weight: 300; color: {TEXT}; }}
+    .soft {{ background: linear-gradient(90deg, {WARM}, {ACCENT}); -webkit-background-clip: text;
+      background-clip: text; color: transparent; }}
+    p {{ margin: 18px 0 0; font-size: 15px; color: {MUTED}; }}
+    .rule {{ align-self: stretch; background: linear-gradient(180deg, transparent, {BORDER} 20%, {BORDER} 80%, transparent); }}
+    dl {{ margin: 0; display: grid; grid-template-columns: 82px 1fr; row-gap: 15px; align-items: baseline; }}
+    dt {{ font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: {MUTED}; }}
+    dd {{ margin: 0; font-size: 14.5px; color: {SOFT}; }}
+    .prompt {{ margin-top: 22px; font: 11.5px {MONO}; color: {DIM}; }}
+    .caret {{ display: inline-block; width: 7px; height: 13px; margin-left: 4px; vertical-align: -2px;
+      background: {ACCENT}; opacity: .7; animation: blink 1.1s steps(1) infinite; }}
+    @keyframes sheen {{ from {{ background-position: 100% 0; }} to {{ background-position: 0% 0; }} }}
+    @keyframes drift {{ from {{ transform: translate(0, 0); }} to {{ transform: translate(60px, 24px); }} }}
+    @keyframes pulse {{ 0% {{ box-shadow: 0 0 0 0 rgba(217,201,176,.45); }} 70%, 100% {{ box-shadow: 0 0 0 9px rgba(217,201,176,0); }} }}
+    @keyframes blink {{ 50% {{ opacity: 0; }} }}
+    @media (prefers-reduced-motion: reduce) {{ .wrap, .blob, .dot, .caret {{ animation: none; }} }}
   </style>'''
-    body = f'''{panel(w, h)}
-  <circle class="pulse" cx="54" cy="64" r="4" fill="{WARM}"/>
-  <circle cx="54" cy="64" r="3.5" fill="{WARM}"/>
-  {t(68, 64, "HELLO, I'M P0MPURIN", 12, ACCENT, spacing=4)}
-  {t(48, 112, "I make homebrew, desktop apps", 31, TEXT, weight=300)}
-  <text x="48" y="152" font-family="{SANS}" font-size="31" font-weight="300" fill="{TEXT}" dominant-baseline="central">and <tspan fill="{WARM}">small things</tspan> for the web.</text>
-  {t(48, 204, "old hardware, simple interfaces, software that stays out of the way.", 15, MUTED)}
-  <rect x="764" y="52" width="1" height="164" fill="{BORDER}"/>
-  {facts}
-  {t(808, 230, "~/p0mpurin $ ls ./projects", 11.5, DIM, "mono")}'''
+    body = f'''<foreignObject x="0" y="0" width="{w}" height="{h}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="wrap"><div class="card">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="left">
+        <div class="hello"><span class="dot"></span>hello, i'm p0mpurin</div>
+        <h1>I make homebrew, desktop apps<br/>and <span class="soft">small things</span> for the web.</h1>
+        <p>old hardware, simple interfaces, software that stays out of the way.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="right">
+        <dl>{facts}</dl>
+        <div class="prompt">~/p0mpurin $ ls ./projects<span class="caret"></span></div>
+      </div>
+    </div></div>
+  </foreignObject>'''
     save("intro.svg", w, h, body, "hello, i'm p0mpurin", style)
 
 
