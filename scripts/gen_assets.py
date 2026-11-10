@@ -218,24 +218,49 @@ CARDS = [
 
 def cards():
     clear("card-")
+    # HTML + CSS via foreignObject, matching the intro card; each card's sheen is
+    # offset so the six borders shimmer one after another rather than in sync
     w, h = 600, 200
     for i, (slug, title, color, lang, lines, tags) in enumerate(CARDS, 1):
-        desc = "".join(t(28, 100 + j * 21, l, 14, MUTED) for j, l in enumerate(lines))
-        x, chips = 28, ""
-        for tag in tags:
-            cw, c = chip(x, 152, tag)
-            chips += c
-            x += cw + 8
-        lang_w = tw(lang, 12.5)
-        body = f'''{panel(w, h)}
-  {t(28, 38, f"{i:02d}", 11.5, WARM, "mono")}
-  {t(572, 38, "↗", 15, MUTED, anchor="end")}
-  {t(28, 70, title, 21, TEXT, weight=600, spacing=0.4)}
-  {desc}
-  {chips}
-  <circle cx="{572 - lang_w - 10:.1f}" cy="163" r="4" fill="{color}"/>
-  {t(572, 163, lang, 12.5, MUTED, anchor="end")}'''
-        save(f"card-{slug}.svg", w, h, body, title)
+        style = f'''<style>
+    .wrap {{ width: {w}px; height: {h}px; box-sizing: border-box; padding: 1px; border-radius: 15px;
+      background: linear-gradient(110deg, {BORDER} 0%, {BORDER} 40%, rgba(159,179,200,.5) 49%,
+                  rgba(217,201,176,.4) 53%, {BORDER} 62%, {BORDER} 100%);
+      background-size: 300% 100%; animation: sheen 12s linear infinite; animation-delay: -{(i - 1) * 2}s; }}
+    .card {{ position: relative; height: 100%; box-sizing: border-box; border-radius: 14px; overflow: hidden;
+      background: {BG}; padding: 26px 28px 24px; display: flex; flex-direction: column; font-family: {SANS}; }}
+    .blob {{ position: absolute; border-radius: 50%; filter: blur(50px); pointer-events: none; }}
+    .b1 {{ width: 300px; height: 160px; left: -110px; top: -110px; background: {ACCENT}; opacity: .13; }}
+    .b2 {{ width: 220px; height: 120px; right: -80px; bottom: -90px; background: {color}; opacity: .08;
+      animation: drift 14s ease-in-out infinite alternate; }}
+    .top, .title, .desc, .foot {{ position: relative; }}
+    .top {{ display: flex; justify-content: space-between; align-items: center;
+      font: 11.5px {MONO}; color: {WARM}; }}
+    .arrow {{ font: 15px {SANS}; color: {MUTED}; }}
+    .title {{ margin-top: 14px; font-size: 21px; font-weight: 600; letter-spacing: .4px; color: {TEXT}; }}
+    .desc {{ margin-top: 10px; font-size: 14px; line-height: 21px; color: {MUTED}; }}
+    .foot {{ margin-top: auto; display: flex; align-items: center; gap: 8px; }}
+    .chip {{ font: 11.5px {MONO}; color: {ACCENT}; padding: 3px 10px; border-radius: 11px;
+      background: rgba(159,179,200,.06); border: 1px solid rgba(159,179,200,.28); }}
+    .lang {{ margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: {MUTED}; }}
+    .lang i {{ width: 8px; height: 8px; border-radius: 50%; background: {color};
+      box-shadow: 0 0 8px {color}; }}
+    @keyframes sheen {{ from {{ background-position: 100% 0; }} to {{ background-position: 0% 0; }} }}
+    @keyframes drift {{ from {{ transform: translate(0, 0); }} to {{ transform: translate(-40px, -14px); }} }}
+    @media (prefers-reduced-motion: reduce) {{ .wrap, .blob {{ animation: none; }} }}
+  </style>'''
+        chips = "".join(f'<span class="chip">{escape(tag)}</span>' for tag in tags)
+        desc = "<br/>".join(escape(l) for l in lines)
+        body = f'''<foreignObject x="0" y="0" width="{w}" height="{h}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="wrap"><div class="card">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="top"><span>{i:02d}</span><span class="arrow">↗</span></div>
+      <div class="title">{escape(title)}</div>
+      <div class="desc">{desc}</div>
+      <div class="foot">{chips}<span class="lang"><i></i>{escape(lang)}</span></div>
+    </div></div>
+  </foreignObject>'''
+        save(f"card-{slug}.svg", w, h, body, title, style)
 
 
 # ---------- toolkit ----------
